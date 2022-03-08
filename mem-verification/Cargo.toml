@@ -1,0 +1,20 @@
+[package]
+name = "mem-verification"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+wasmer = "2.2"
+wasmer-wasi = "2.2"
+
+wasmtime = "0.34"
+wasmtime-wasi = "0.34"
+
+tokio = { version = "1.15", default-features = false, features = ["sync", "time", "macros", "rt-multi-thread"] }
+structopt = "0.3.26"
+
+anyhow = "1.0.55"
+
+comm = { path = "../comm" }

@@ -1,0 +1,7 @@
+[workspace]
+members = ["wasis/simply-wasi", "comm", "mem-verification"]
+
+
+[profile.release]
+lto = true
+opt-level = 'z'
