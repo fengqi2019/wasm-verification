@@ -1,4 +1,4 @@
-use wasmtime::{Engine, Instance, Module};
+use wasmtime::{Engine, Instance, Linker, Module};
 use wasmtime_wasi::WasiCtxBuilder;
 use anyhow::Result;
 
@@ -14,6 +14,9 @@ pub fn init_module_wasmtime(wasm_path: &str) -> Result<Module> {
 
 pub fn init_instance_wasmtime(wasm_path: &str) -> Result<Instance> {
     let engine = Engine::default();
+    let mut linker = Linker::new(&engine);
+    wasmtime_wasi::add_to_linker(&mut linker, |s| s)?;
+
     let wasi = WasiCtxBuilder::new()
         .inherit_stdio()
         .inherit_args()?
@@ -26,7 +29,7 @@ pub fn init_instance_wasmtime(wasm_path: &str) -> Result<Instance> {
     for export in module.exports() {
         println!("{:?}", export);
     }
-    Ok(Instance::new(&mut store, &module, &[]).unwrap())
+    Ok(linker.instantiate(&mut store, &module)?)
 }
 
 #[test]
