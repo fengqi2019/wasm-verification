@@ -2,7 +2,7 @@
 use std::path::Path;
 use anyhow::bail;
 pub use anyhow::Result;
-pub use log::{debug, info};
+pub use log::{debug, info, warn};
 
 pub fn log_setting_with_level(level: &str) {
     std::env::set_var("RUST_LOG", level);

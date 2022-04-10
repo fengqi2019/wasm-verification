@@ -2,6 +2,7 @@ pub mod wasmer_lib;
 pub mod wasmtime_lib;
 
 use std::fmt::{Debug, Formatter};
+use std::path::Path;
 use comm::*;
 use structopt::StructOpt;
 use crate::wasmer_lib::init_module_wasmer;
@@ -48,9 +49,8 @@ fn parse_for_times(arg: &str) -> u64 {
     }
 }
 
-
 pub fn check_bigger_wasm_mem(times: u64, runtime_ty: u64) -> Result<()> {
-    _check(times, runtime_ty, "sources/simply_wasi_bigger.wasm")
+    _check(times, runtime_ty, "./sources/simply_wasi_bigger.wasm")
 }
 pub fn check_big_wasm_mem(times: u64, runtime_ty: u64) -> Result<()> {
     _check(times, runtime_ty, "sources/simply_wasi.wasm")
@@ -63,6 +63,10 @@ pub fn check_clone_small_wasm_mem(times: u64, runtime_ty: u64) -> Result<()> {
 }
 
 fn _check(times: u64, runtime_ty: u64, wasm_path: &str) -> Result<()> {
+    // let path: &Path = Path::new(".");
+    // println!("{:?}", path.canonicalize()?);
+    let path: &Path = Path::new(wasm_path);
+    debug!("{:?}", path.canonicalize()?);
     let init_mem = proc_mem()?;
     let end_mem: u64;
     match runtime_ty {

@@ -1,0 +1,44 @@
+[env]
+CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
+
+[tasks.mem-build]
+command = "cargo"
+args = ["build", "--release", "--package", "mem-verification","--bin", "mem-verification"]
+
+[tasks.mem-wasmtime-0]
+command = "./target/release/mem-verification"
+args = ["-y", "0", "-t", "100", "-r", "0"]
+dependencies = ["mem-build"]
+private = true
+[tasks.mem-wasmtime-1]
+command = "./target/release/mem-verification"
+args = ["-y", "1", "-t", "100", "-r", "0"]
+dependencies = ["mem-build"]
+private = true
+[tasks.mem-wasmtime-2]
+command = "./target/release/mem-verification"
+args = ["-y", "2", "-t", "100", "-r", "0"]
+dependencies = ["mem-build"]
+private = true
+
+[tasks.mem-verif]
+dependencies = ["mem-wasmtime-0", "mem-wasmtime-1"
+    , "mem-wasmtime-2", "mem-wasmer-0", "mem-wasmer-1", "mem-wasmer-2"]
+
+
+
+[tasks.mem-wasmer-0]
+command = "./target/release/mem-verification"
+args = ["-y", "0", "-t", "100", "-r", "1"]
+dependencies = ["mem-build"]
+private = true
+[tasks.mem-wasmer-1]
+command = "./target/release/mem-verification"
+args = ["-y", "1", "-t", "100", "-r", "1"]
+dependencies = ["mem-build"]
+private = true
+[tasks.mem-wasmer-2]
+command = "./target/release/mem-verification"
+args = ["-y", "2", "-t", "100", "-r", "1"]
+dependencies = ["mem-build"]
+private = true

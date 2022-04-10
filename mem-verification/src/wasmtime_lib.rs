@@ -23,12 +23,12 @@ pub fn init_instance_wasmtime(wasm_path: &str) -> Result<Instance> {
         .build();
     let mut store = wasmtime::Store::new(&engine, wasi);
     let module = wasmtime::Module::from_file(store.engine(), wasm_path)?;
-    for import in module.imports() {
-        println!("{:?}", import);
-    }
-    for export in module.exports() {
-        println!("{:?}", export);
-    }
+    // for import in module.imports() {
+    //     println!("{:?}", import);
+    // }
+    // for export in module.exports() {
+    //     println!("{:?}", export);
+    // }
     Ok(linker.instantiate(&mut store, &module)?)
 }
 
