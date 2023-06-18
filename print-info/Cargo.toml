@@ -1,0 +1,13 @@
+[package]
+name = "print-info"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+wasmtime = "=9.0.3"
+wasmtime-wasi = "9.0.3"
+tokio = { version = "1", default-features = false, features = ["sync", "time", "macros", "rt-multi-thread"] }
+anyhow = "1"
+custom-utils = "0.10.14"

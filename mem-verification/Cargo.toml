@@ -9,8 +9,8 @@ edition = "2021"
 wasmer = "2.2"
 wasmer-wasi = "2.2"
 
-wasmtime = "0.34"
-wasmtime-wasi = "0.34"
+wasmtime = "9.0.3"
+wasmtime-wasi = "9.0.3"
 
 tokio = { version = "1.15", default-features = false, features = ["sync", "time", "macros", "rt-multi-thread"] }
 structopt = "0.3.26"

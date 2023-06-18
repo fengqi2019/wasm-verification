@@ -1,6 +1,7 @@
 [workspace]
-members = ["wasis/simply-wasi", "comm", "mem-verification"]
-
+members = ["wasis/simply-wasi", "comm", "mem-verification"
+    , "print-info", "wasis/with_args", "wasi_host/with_args_host"]
+resolver = "2"
 
 [profile.release]
 lto = true

@@ -1,44 +1,47 @@
-[env]
-CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
+[config]
+default_to_workspace = false
 
-[tasks.mem-build]
+[tasks.wasi-build]
 command = "cargo"
-args = ["build", "--release", "--package", "mem-verification","--bin", "mem-verification"]
+args = ["build", "--release", "--target", "wasm32-wasi","--package", "simply-wasi"]
+[tasks.with-args]
+command = "cargo"
+args = ["build", "--release", "--target", "wasm32-wasi","--package", "with-args"]
 
-[tasks.mem-wasmtime-0]
-command = "./target/release/mem-verification"
-args = ["-y", "0", "-t", "100", "-r", "0"]
-dependencies = ["mem-build"]
-private = true
-[tasks.mem-wasmtime-1]
-command = "./target/release/mem-verification"
-args = ["-y", "1", "-t", "100", "-r", "0"]
-dependencies = ["mem-build"]
-private = true
-[tasks.mem-wasmtime-2]
-command = "./target/release/mem-verification"
-args = ["-y", "2", "-t", "100", "-r", "0"]
-dependencies = ["mem-build"]
-private = true
-
-[tasks.mem-verif]
-dependencies = ["mem-wasmtime-0", "mem-wasmtime-1"
-    , "mem-wasmtime-2", "mem-wasmer-0", "mem-wasmer-1", "mem-wasmer-2"]
-
-
-
-[tasks.mem-wasmer-0]
-command = "./target/release/mem-verification"
-args = ["-y", "0", "-t", "100", "-r", "1"]
-dependencies = ["mem-build"]
-private = true
-[tasks.mem-wasmer-1]
-command = "./target/release/mem-verification"
-args = ["-y", "1", "-t", "100", "-r", "1"]
-dependencies = ["mem-build"]
-private = true
-[tasks.mem-wasmer-2]
-command = "./target/release/mem-verification"
-args = ["-y", "2", "-t", "100", "-r", "1"]
-dependencies = ["mem-build"]
-private = true
+#[tasks.mem-wasmtime-0]
+#command = "./target/release/mem-verification"
+#args = ["-y", "0", "-t", "100", "-r", "0"]
+#dependencies = ["mem-build"]
+#private = true
+#[tasks.mem-wasmtime-1]
+#command = "./target/release/mem-verification"
+#args = ["-y", "1", "-t", "100", "-r", "0"]
+#dependencies = ["mem-build"]
+#private = true
+#[tasks.mem-wasmtime-2]
+#command = "./target/release/mem-verification"
+#args = ["-y", "2", "-t", "100", "-r", "0"]
+#dependencies = ["mem-build"]
+#private = true
+#
+#[tasks.mem-verif]
+#dependencies = ["mem-wasmtime-0", "mem-wasmtime-1"
+#    , "mem-wasmtime-2", "mem-wasmer-0", "mem-wasmer-1", "mem-wasmer-2"]
+#
+#
+#
+#[tasks.mem-wasmer-0]
+#command = "./target/release/mem-verification"
+#args = ["-y", "0", "-t", "100", "-r", "1"]
+#dependencies = ["mem-build"]
+#private = true
+#[tasks.mem-wasmer-1]
+#command = "./target/release/mem-verification"
+#args = ["-y", "1", "-t", "100", "-r", "1"]
+#dependencies = ["mem-build"]
+#private = true
+#[tasks.mem-wasmer-2]
+#command = "./target/release/mem-verification"
+#args = ["-y", "2", "-t", "100", "-r", "1"]
+#dependencies = ["mem-build"]
+#private = true
